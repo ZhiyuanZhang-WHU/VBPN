@@ -10,6 +10,9 @@ Deep learning-based methods play an important role in pansharpening that utilize
 
 ![Difference between traditional deep learning-based pansharpening methods and our proposed variational blind pansharpening method. (a) Training and testing process of traditional deep learning-based pansharpening methods. (b) Training and testing process of our proposed variational pansharpening method.](https://github.com/ZhiyuanZhang-WHU/VBPN/blob/main/imgs/problem.png)
 
+### Experimental results
+![Visual results of pansharpening methods on simulated GaoFen-2 dataset with PAN noise level 30 (RGB Bands). (a) LR-MS image. (b) PNN. (c) DRPNN. (d) MSDCNN. (e) DiCNN. (f) FusionNet. (g) Hyper-DSNet. (h) ADKNet. (i) MSDDN. (j) BiMPan. (k) Proposed. (l) Ground Truth.](https://github.com/ZhiyuanZhang-WHU/VBPN/blob/main/imgs/Fig4.png)
+
 ### How to Use
 
 ### Dataset
