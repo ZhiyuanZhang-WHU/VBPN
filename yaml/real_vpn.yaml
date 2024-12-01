@@ -1,0 +1,69 @@
+global_setting:
+  seed: 20000320
+  device : '1'
+  gpu : True
+  action : 'real' # train | test | real
+  task: 'pansharping' # denoise, deblurr, super-resolution, pansharping or standard
+  record_dir : 'Experiment'
+  note_name: ''
+  model_name : 'vpn'
+  resume :
+    state: False
+    mode : 'model' # all | model | other
+    checkpoint : "checkpoint/save_model/model_current_0346.pth"
+# 大学习率
+directory:
+  vision : 'visions'
+  mat: 'visions/mat'
+  ms_lr: 'visions/ms_lr'
+  ms_label: 'visions/ms_label'
+  ms_sr: 'visions/ms_sr'
+  resume : 'resume_model'
+
+network:
+  task: 'pansharping'
+  name : 'vpn'
+  mode : 'gray' # the image type
+  params:
+    im_chn : 4
+    pan_chn : 1
+    sigma_chn: 1
+    kernel_chn: 3
+    F_chn: 2
+    n_feat: [64, 128, 192]
+    dep_S: 5
+    dep_K: 8
+    noise_cond: False
+    kernel_cond: False
+    F_cond: False
+    n_resblocks: 1
+    extra_mode: 'null'
+    noise_avg: False
+
+
+dataset:
+  task :
+    name: 'pansharping'
+    noise: 'Gaussian'
+  name : 'vpn'
+  clip : True
+  sf: 4
+  downsampler: 'bicubic' # 'bicubic' | 'direct'
+  test: # validation
+    # MS部分
+    ms_patch_size: 64
+    ms_k_size: 21
+    ms_kernel_shift: False
+    ms_noise_type: 'Gaussian'
+    # PAN部分
+    pan_clip: False
+    pan_nlevels: 30
+    pan_task: 'gaussian'    
+    # levels: [50.0]
+    target : "  "
+
+test:
+  save : True
+  gpu : False
+  metric_mode : 'rgb' # y
+

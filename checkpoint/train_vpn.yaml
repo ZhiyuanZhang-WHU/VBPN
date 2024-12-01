@@ -1,0 +1,126 @@
+global_setting:
+  seed: 20000320
+  device : '1'
+  gpu : True
+  action : 'train' # train | test | real
+  task: 'pansharping' # denoise, deblurr, super-resolution, pansharping or standard
+  record_dir : 'Experiment'
+  note_name: 'unet_v1'
+  model_name : 'vpn'
+  resume :
+    state: False
+    mode : 'all' # all | model | other
+    checkpoint : "Experiment/train/standard/unet_v1/0305_22_00_28/save_model/model_current_0003.pth"
+# 大学习率
+directory:
+  resume : 'resume_model'
+  save_model: 'save_model'
+  runlog: 'runlog'
+  traindata: 'TrainFolder'
+
+network:
+  task: 'pansharping'
+  name : 'vpn'
+  mode : 'gray' # the image type
+  params:
+    im_chn : 4
+    pan_chn : 1
+    sigma_chn: 1
+    kernel_chn: 3
+    F_chn: 2
+    n_feat: [64, 128, 192]
+    dep_S: 5
+    dep_K: 8
+    noise_cond: False
+    kernel_cond: False
+    F_cond: False
+    n_resblocks: 1
+    extra_mode: 'null'
+    noise_avg: True
+
+
+dataset:
+  task :
+    name: 'pansharping'
+    noise: 'Gaussian'
+  name : 'vpn'
+  clip : True
+  sf: 4
+  downsampler: 'bicubic' # 'bicubic' | 'direct'
+  train:
+
+    # MS部分
+    ms_patch_size: 64
+    ms_k_size: 21
+    ms_kernel_shift: False
+    ms_noise_level: [0.1, 15]
+    ms_noise_jpeg: [0.1, 10]
+    ms_add_jpeg: False
+    # PAN部分
+    pan_clip: False
+    pan_nlevels: 30
+    pan_task: 'Gaussian'
+
+
+    # levels :
+    #   begin: 50
+    #   end: 50
+    #   step : 1
+    target : "/home/zzy/pansharpening_data/Our_Dataset_norandom/TrainFolder"
+  test: # validation
+    # MS部分
+    ms_patch_size: 64
+    ms_k_size: 21
+    ms_kernel_shift: False
+    ms_noise_type: 'Gaussian'
+    # PAN部分
+    pan_clip: False
+    pan_nlevels: 30
+    pan_task: 'gaussian'    
+    # levels: [50.0]
+    target : "/home/zzy/pansharpening_data/Our_Dataset_norandom/ValidFolder"
+
+train:
+  # vpn model 加入的参数
+  var_window: 9
+  kappa0: 50
+  r2: 1.e-4
+  eps2: 1.e-5
+  penalty_K: [0.02, 2]
+
+
+  iteration : 1.e+6
+  patch : 256 # vpn里没用
+  batch_size : 128 
+  freq_valid : 1
+  num_worker : 8
+  patience : 500
+  loss : '' # 'l1' | 'mse' | 'l1_edge' | 'mse_edge' | 'mprnet' # 'char'
+  metric_mode : 'rgb' # the channel for psnr calculation
+  init:
+    state : False
+    name: 'swinconv'
+  optim:
+    name: 'Adam'
+    params:
+      lr : 3.e-4
+      betas : [0.9, 0.999]
+      eps : 1.e-8
+      weight_decay : 1.e-8
+    # gradient_max : -1
+    clip_grad_S: 1.e+2
+    clip_grad_F: 1.e+2
+    clip_grad_K: 1.e+2
+    clip_grad_R: 1.e+2
+
+
+  scheduler:
+    state : False
+    name : 'CosineAnnealingLR'
+    params:
+      T_max : 2000
+      eta_min : 2.e-6 # step_size = 2e5 // (nums // batch_size)
+    warmup:
+      state: False
+      multiplier: 1.0
+      warmup_epoch: 3
