@@ -41,7 +41,7 @@ def __save_tensorAsmat__(save_dir, name, tensor, ms_lr):
         image = img_as_ubyte(image.clip(-1, 1))
         
         rgb_img = image[:, :, 0:3]
-        rgb_img = cv.cvtColor(rgb_img, cv.COLOR_RGB2BGR)
+       
         bmp_save_path = os.path.join(save_dir, 'ms_sr', bmp_name)
         cv.imwrite(bmp_save_path, rgb_img)
 
@@ -51,7 +51,7 @@ def __save_tensorAsmat__(save_dir, name, tensor, ms_lr):
         lr = img_as_ubyte(lr.clip(-1, 1))
 
         rgb_img = lr[:, :, 0:3]
-        rgb_img = cv.cvtColor(rgb_img, cv.COLOR_RGB2BGR)
+        
         bmp_save_path = os.path.join(save_dir, 'ms_lr', bmp_name)
         cv.imwrite(bmp_save_path, rgb_img)  
 
