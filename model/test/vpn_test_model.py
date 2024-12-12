@@ -71,7 +71,7 @@ class BasicModel:
         image = img_as_ubyte(image.clip(-1, 1))
         
         rgb_img = image[:, :, 0:3]
-        rgb_img = cv.cvtColor(rgb_img, cv.COLOR_RGB2BGR)
+        
         bmp_save_path = os.path.join(self.save_dir, 'ms_sr', bmp_name)
         cv.imwrite(bmp_save_path, rgb_img)
 
@@ -81,7 +81,7 @@ class BasicModel:
         lr = img_as_ubyte(lr.clip(-1, 1))
 
         rgb_img = lr[:, :, 0:3]
-        rgb_img = cv.cvtColor(rgb_img, cv.COLOR_RGB2BGR)
+        
         bmp_save_path = os.path.join(self.save_dir, 'ms_lr', bmp_name)
         cv.imwrite(bmp_save_path, rgb_img)  
 
@@ -91,7 +91,7 @@ class BasicModel:
         gt = img_as_ubyte(gt.clip(-1, 1))
 
         rgb_img = gt[:, :, 0:3]
-        rgb_img = cv.cvtColor(rgb_img, cv.COLOR_RGB2BGR)
+        
         bmp_save_path = os.path.join(self.save_dir, 'ms_label', bmp_name)
         cv.imwrite(bmp_save_path, rgb_img) 
 
