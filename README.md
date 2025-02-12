@@ -61,7 +61,7 @@ device: '1' (GPU number)
 
 record_dir: 'Experiment' (name of the experiment folder)
 
-note_name: '520_test' (name of the process folder for this training)
+note_name: '520_test' (name of the process folder for this test)
 
 checkpoint : "your checkpoint or our initial checkpoint provided in'checkpoint/save_model/model_current_0346.pth'"
 
