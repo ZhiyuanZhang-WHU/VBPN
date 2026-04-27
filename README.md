@@ -1,7 +1,7 @@
 # Code for article " Deep Variational Network for Blind Pansharpening"
 
-## Congratulations!!
-Our work has been accepted by  IEEE TRANSACTIONS ON NEURAL NETWORKS AND LEARNING SYSTEMS!!!!!!
+## Congratulations!
+Our work has been accepted by  IEEE TRANSACTIONS ON NEURAL NETWORKS AND LEARNING SYSTEMS
 
 [VBPN](https://ieeexplore.ieee.org/abstract/document/10632205)
 
@@ -14,6 +14,10 @@ Deep learning-based methods play an important role in pansharpening that utilize
 ![Visual results of pansharpening methods on simulated GaoFen-2 dataset with PAN noise level 30 (RGB Bands). (a) LR-MS image. (b) PNN. (c) DRPNN. (d) MSDCNN. (e) DiCNN. (f) FusionNet. (g) Hyper-DSNet. (h) ADKNet. (i) MSDDN. (j) BiMPan. (k) Proposed. (l) Ground Truth.](https://github.com/ZhiyuanZhang-WHU/VBPN/blob/main/imgs/Fig4.png)
 
 ### How to Use
+
+### Attention
+
+This paper primarily focuses on the problem of degradation estimation during the fusion process. Therefore, both the loss function and the individual degradation estimation subnetworks are specifically designed for this purpose.
 
 ### Dataset
 
